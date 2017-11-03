@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Pattern:</strong>
+  <%= @search_record.pattern %>
+</p>
+
+<p>
+  <strong>Count:</strong>
+  <%= @search_record.count %>
+</p>
+
+<p>
+  <strong>Users:</strong>
+  <%= @search_record.users %>
+</p>
+
+<%= link_to 'Edit', edit_search_record_path(@search_record) %> |
+<%= link_to 'Back', search_records_path %>

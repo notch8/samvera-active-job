@@ -1,0 +1,2 @@
+class SearchRecord < ApplicationRecord
+end

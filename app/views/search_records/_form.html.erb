@@ -1,0 +1,32 @@
+<%= form_with(model: search_record, local: true) do |form| %>
+  <% if search_record.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(search_record.errors.count, "error") %> prohibited this search_record from being saved:</h2>
+
+      <ul>
+      <% search_record.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :pattern %>
+    <%= form.text_field :pattern, id: :search_record_pattern %>
+  </div>
+
+  <div class="field">
+    <%= form.label :count %>
+    <%= form.number_field :count, id: :search_record_count %>
+  </div>
+
+  <div class="field">
+    <%= form.label :users %>
+    <%= form.text_area :users, id: :search_record_users %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
