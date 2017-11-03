@@ -63,3 +63,4 @@ group :development, :test do
   gem 'fcrepo_wrapper'
   gem 'rspec-rails'
 end
+gem 'delayed_job_active_record'

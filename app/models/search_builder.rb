@@ -7,9 +7,7 @@ class SearchBuilder < Blacklight::SearchBuilder
   self.default_processor_chain += [:save_search_record]
 
   def save_search_record(solr_parameters)
-    search_record = SearchRecord.where(pattern: solr_parameters.to_s).first_or_initialize(count: 0)
-    search_record.count += 1
-    search_record.save
+    SearchRecordCreateJob.perform_later(solr_parameters)
   end
 
   def self.create_report
