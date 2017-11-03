@@ -11,15 +11,15 @@
 ## Install DelayedJob for ActiveJob
 ### Gemfile Edits and bundle
 ```
-$ echo "gem 'delayed_job_active_record' >> Gemfile
+$ echo "gem 'delayed_job_active_record'" >> Gemfile
 
 THEN
 
-$ bundle
+$ bundle && bin/rails g delayed_job:active_record && bin/rails db:migrate
 ```
 
 ### Update configuration to use DelayedJob
-In app/config/application.rb add the following line
+In config/application.rb add the following line
 ```
 config.active_job.queue_adapter = :delayed_job
 ```
@@ -50,8 +50,11 @@ end
 
 ### Start the runner 
 ```
-$ bin/delayed_job start
+$ bin/rails jobs:work 
 ```
+
+### Check if it works
+Finally reload the home page of the application (http://localhost:3000) to create a new search_record and see the runner works through a job
 
 ### Run the report on a daily basis
 #### Create a new job
@@ -68,4 +71,16 @@ def perform
   SearchReportCreateJob.set(wait_until: Date.tomorrow.noon).perform_later
 end
 ...
+```
+
+### Launch the first job by adding it via rails console
+```ruby
+
+> SearchReportCreateJob.perform_later
+```
+
+and see if it made a new job for tomorrow
+``ruby
+
+> Delayed::Job.last 
 ```
